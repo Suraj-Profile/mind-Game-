@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathMind Evolution | Master the Numbers</title>
+    <meta name="description"
+        content="A premium mathematical game to master addition, subtraction, multiplication, and more. Challenge yourself with daily tasks and level up your skills!">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app" class="app-container">
+        <!-- Background Elements -->
+        <div class="bg-glow-1"></div>
+        <div class="bg-glow-2"></div>
+
+        <!-- Home Screen -->
+        <section id="home-screen" class="screen active">
+            <header>
+                <div class="logo-group">
+                    <h1 class="logo">Math<span>Mind</span></h1>
+                    <p class="logo-tagline">Quantum Evolution</p>
+
+                </div>
+                <div class="user-stats">
+                    <button id="theme-toggle" class="stat-badge" title="Toggle Theme">
+                        <span class="stat-icon" id="theme-icon">🌙</span>
+                    </button>
+                    <div class="stat-badge" title="Experience Points">
+                        <span class="stat-icon">⚡</span>
+                        <span id="total-points">0</span> XP
+                    </div>
+                    <div class="stat-badge" title="Current Level">
+                        <span class="stat-icon">🏆</span>
+                        <span id="current-rank">Novice</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="home-content">
+                <div class="daily-challenge-card" id="daily-challenge-btn">
+                    <div class="badge-new">NEW</div>
+                    <div class="challenge-info">
+                        <h3>Daily Sprint</h3>
+                        <p>Complete the daily challenge for double XP!</p>
+                    </div>
+                    <div class="challenge-status">Active</div>
+                </div>
+
+                <div class="game-modes">
+                    <h2>Select Complexity</h2>
+                    <div class="difficulty-grid">
+                        <button class="diff-btn" data-level="easy">
+                            <span class="diff-icon">🌱</span>
+                            <div class="diff-info">
+                                <span class="diff-name">Easy</span>
+                                <span class="diff-desc">Basics & Fun</span>
+                            </div>
+                        </button>
+                        <button class="diff-btn" data-level="medium">
+                            <span class="diff-icon">⚡</span>
+                            <div class="diff-info">
+                                <span class="diff-name">Medium</span>
+                                <span class="diff-desc">Getting Sharper</span>
+                            </div>
+                        </button>
+                        <button class="diff-btn" data-level="hard" data-locked="true">
+                            <span class="diff-icon">🔥</span>
+                            <div class="diff-info">
+                                <span class="diff-name">Hard</span>
+                                <span class="diff-desc">Elite Challenge</span>
+                            </div>
+                            <span class="lock-icon">🔒</span>
+                        </button>
+                        <button class="diff-btn" data-level="expert" data-locked="true">
+                            <span class="diff-icon">💎</span>
+                            <div class="diff-info">
+                                <span class="diff-name">Expert</span>
+                                <span class="diff-desc">Pure Logic</span>
+                            </div>
+                            <span class="lock-icon">🔒</span>
+                        </button>
+                        <button class="diff-btn" data-level="master" data-locked="true">
+                            <span class="diff-icon">🧠</span>
+                            <div class="diff-info">
+                                <span class="diff-name">Master</span>
+                                <span class="diff-desc">Human Calculator</span>
+                            </div>
+                            <span class="lock-icon">🔒</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="config-panel">
+                    <div class="config-item">
+                        <label>Timer</label>
+                        <select id="timer-select">
+                            <option value="30">30 Seconds</option>
+                            <option value="60" selected>1 Minute</option>
+                            <option value="90">1.5 Minutes</option>
+                            <option value="120">2 Minutes</option>
+                            <option value="150">2.5 Minutes</option>
+                            <option value="180">3 Minutes</option>
+                            <option value="300">5 Minutes</option>
+                            <option value="420">7 Minutes</option>
+                            <option value="600">10 Minutes</option>
+                        </select>
+                    </div>
+                    <div class="config-item">
+                        <label>Operators</label>
+                        <div class="operator-switches">
+                            <button class="op-btn active" data-op="add">+</button>
+                            <button class="op-btn active" data-op="sub">−</button>
+                            <button class="op-btn" data-op="mul">×</button>
+                            <button class="op-btn" data-op="div">÷</button>
+                            <button class="op-btn" data-op="pct">%</button>
+                            <button class="op-btn" data-op="sim">#</button>
+                            <button class="op-btn" data-op="sq">x²</button>
+                            <button class="op-btn" data-op="root">√</button>
+                            <button class="op-btn" data-op="bodmas">B</button>
+                            <button class="op-btn" data-op="cube">x³</button>
+                            <button class="op-btn" data-op="pow4">x⁴</button>
+                            <button class="op-btn" data-op="mod">%</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game modes removed: app uses default challenge behavior -->
+
+
+
+                <div class="action-footer">
+                    <button id="start-game-btn" class="primary-btn">START EVOLUTION</button>
+                    <div class="secondary-actions">
+                        <button id="mistake-review-btn">Review Mistakes</button>
+                        <button id="stats-btn">Statistics</button>
+                    </div>
+                </div>
+            </main>
+        </section>
+
+        <!-- Game Screen -->
+        <section id="game-screen" class="screen">
+            <div class="game-header">
+                <button id="quit-btn" class="icon-btn">✕</button>
+                <div class="timer-display">
+                    <svg class="timer-svg" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" class="timer-bg"></circle>
+                        <circle cx="50" cy="50" r="45" class="timer-progress" id="timer-bar"></circle>
+                    </svg>
+                    <span id="timer-text">01:00</span>
+                </div>
+                <div class="streak-counter">
+                    <span class="streak-fire">🔥</span>
+                    <span id="streak-count">0</span>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="game-progress"></div>
+            </div>
+
+            <main class="question-area">
+                <div class="question-card">
+                    <div id="question-text" class="question-text">12 + 45</div>
+                    <div class="answer-reveal" id="answer-reveal">Answer: 57</div>
+                </div>
+
+                <div class="answer-input-wrapper">
+                    <input type="number" id="answer-input" placeholder="Type your answer..." autocomplete="off">
+                    <button id="submit-btn" class="submit-btn">↵</button>
+                </div>
+
+                <div class="power-ups">
+                    <button class="power-up-btn" id="pu-hint" title="Hint">
+                        <span class="pu-icon">💡</span>
+                        <span class="pu-count" id="hint-count">2</span>
+                    </button>
+                    <button class="power-up-btn" id="pu-skip" title="Skip">
+                        <span class="pu-icon">⏭️</span>
+                        <span class="pu-count" id="skip-count">1</span>
+                    </button>
+                    <button class="power-up-btn" id="pu-time" title="Extra Time">
+                        <span class="pu-icon">⏳</span>
+                        <span class="pu-count" id="time-count">1</span>
+                    </button>
+                    <button class="power-up-btn" id="pu-5050" title="50/50">
+                        <span class="pu-icon">🌓</span>
+                        <span class="pu-count" id="5050-count">1</span>
+                    </button>
+                </div>
+            </main>
+        </section>
+
+        <!-- Result Screen -->
+        <section id="result-screen" class="screen">
+            <div class="results-container">
+                <h2 id="result-title">Game Over!</h2>
+                <div class="results-summary">
+                    <div class="summary-item">
+                        <span class="label">XP Gained</span>
+                        <span class="value" id="xp-gained">+0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Accuracy</span>
+                        <span class="value" id="accuracy-score">0%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Best Streak</span>
+                        <span class="value" id="best-streak">0</span>
+                    </div>
+                </div>
+
+                <div class="rewards-section">
+                    <h3>Unlocked Rewards</h3>
+                    <div id="unlocked-list" class="unlocked-list">
+                        <!-- Rewards dynamically added here -->
+                        <p class="empty-msg">No new rewards this time.</p>
+                    </div>
+                </div>
+
+                <div class="history-section">
+                    <h3>Session Results</h3>
+
+                    <div class="results-counts">
+                        <div class="summary-item small">
+                            <span class="label">Correct</span>
+                            <span class="value" id="correct-count">0</span>
+                        </div>
+                        <div class="summary-item small">
+                            <span class="label">Incorrect</span>
+                            <span class="value" id="wrong-count">0</span>
+                        </div>
+                        <div class="summary-item small">
+                            <span class="label">Attempted</span>
+                            <span class="value" id="attempted-count">0</span>
+                        </div>
+                    </div>
+
+                    <div class="history-lists">
+                        <div class="history-column">
+                            <h4>Correct Answers</h4>
+                            <div id="correct-list" class="session-history">
+                                <p class="empty-msg">No correct answers this session.</p>
+                            </div>
+                        </div>
+
+                        <div class="history-column">
+                            <h4>Incorrect Answers</h4>
+                            <div id="wrong-list" class="session-history">
+                                <p class="empty-msg">No incorrect answers this session.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button id="play-again-btn" class="primary-btn">Play Again</button>
+                    <button id="home-btn" class="secondary-btn">Home Menu</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modals -->
+        <div id="stats-modal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal">&times;</button>
+                <h2>Performance Analytics</h2>
+                <div class="weak-areas">
+                    <h3>Focus Areas</h3>
+                    <div id="weak-areas-list"></div>
+                </div>
+                <div class="rank-progress">
+                    <p>Current Rank: <span id="rank-name-modal">Novice</span></p>
+                    <div class="rank-bar-bg">
+                        <div id="rank-progress-bar" class="rank-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/state.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+
+</html>
